@@ -27,5 +27,6 @@ public class Image extends MultimediaElement {
         for (int i = 0; i < this.brightness; i++) {
             System.out.print(" *");
         }
+        System.out.println(" ");
     }
 }
