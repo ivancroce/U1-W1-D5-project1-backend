@@ -2,6 +2,7 @@ import entities.Audio;
 import entities.Image;
 import entities.MultimediaElement;
 import entities.Video;
+import interfaces.Playable;
 
 import java.util.Scanner;
 
@@ -31,18 +32,18 @@ public class MediaPlayer {
                     break;
                 // Audio
                 case 2:
-                    System.out.println("Duration: ");
+                    System.out.print("Duration: ");
                     int durationAudio = Integer.parseInt(scanner.nextLine());
                     ;
-                    System.out.println("Volume: ");
+                    System.out.print("Volume: ");
                     int volumeAudio = Integer.parseInt(scanner.nextLine());
                     playlist[i] = new Audio(title, durationAudio, volumeAudio);
                     break;
                 // Video
                 case 3:
-                    System.out.println("Duration: ");
+                    System.out.print("Duration: ");
                     int durationVideo = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Volume: ");
+                    System.out.print("Volume: ");
                     int volumeVideo = Integer.parseInt(scanner.nextLine());
                     System.out.print("Brightness: ");
                     int brightnessVideo = Integer.parseInt(scanner.nextLine());
@@ -54,6 +55,33 @@ public class MediaPlayer {
                     break;
             }
         }
+
+        // Media Player
+        int choice;
+        do {
+            System.out.println("--- Media Player ---");
+            System.out.println("Which element do u wanna play?");
+            System.out.print("1-5 or 0 to quit: ");
+
+            choice = Integer.parseInt(scanner.nextLine());
+
+            if (choice > 0 && choice <= 5) {
+                MultimediaElement elementToPlay = playlist[choice - 1];
+
+                System.out.println("Playing: " + elementToPlay.getTitle());
+
+                // the obj is an instance of Playable? casting in Playable to get play() method
+                if (elementToPlay instanceof Playable) {
+                    ((Playable) elementToPlay).play();
+
+                    // the obj is an instance of Image? casting in Image to get show() method
+                } else if (elementToPlay instanceof Image) {
+                    ((Image) elementToPlay).show();
+                }
+            } else if (choice != 0) {
+                System.out.println("Invalid choice.");
+            }
+        } while (choice != 0);
 
         scanner.close();
     }

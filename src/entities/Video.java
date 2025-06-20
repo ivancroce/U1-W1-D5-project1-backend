@@ -46,7 +46,7 @@ public class Video extends MultimediaElement implements Playable {
             for (int k = 0; k < this.brightness; k++) {
                 System.out.print(" *");
             }
+            System.out.println();
         }
-        System.out.println();
     }
 }
